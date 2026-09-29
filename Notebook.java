@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Notebook
 {
     // Storage for an arbitrary number of notes.
-    private ArrayList<String> notes;
+    private ArrayList<Task> notes;
     Scanner in = new Scanner(System.in);
     /**
      * Perform any initialization that is required for the
@@ -22,14 +22,14 @@ public class Notebook
      */
     public Notebook()
     {
-        notes = new ArrayList<String>();
+        notes = new ArrayList<Task>();
     }
 
     /**
      * Store a new note into the notebook.
      * @param note The note to be stored.
      */
-    public void storeNote(String note)
+    public void storeNote(Task note)
     {
         notes.add(note);
     }
@@ -54,7 +54,7 @@ public class Notebook
         else if(noteNumber <= numberOfNotes()) {
             // This is a valid note number, so we can print it.
             int indice = noteNumber - 1;
-            System.out.println(notes.get(indice));
+            System.out.println(notes.get(indice).toString());
         }
         else {
             // This is not a valid note number, so do nothing.
@@ -67,7 +67,7 @@ public class Notebook
             System.out.println("Número de nota inválido.");
         }
         else {
-            Iterator<String> it = notes.iterator();
+            Iterator<Task> it = notes.iterator();
             int i = 0;
             while ( it.hasNext()){
                 it.next();
@@ -87,10 +87,10 @@ public class Notebook
         if (confirmacao.equalsIgnoreCase("n")){
             System.out.println("Operação cancelada!");
         }else{
-            Iterator<String> it = notes.iterator();
+            Iterator<Task> it = notes.iterator();
             while(it.hasNext()){
-                String note = it.next();
-                if (note.contains(key)){
+                Task note = it.next();
+                if (note.toString().contains(key)){
                     it.remove();
                 }
             }
@@ -105,11 +105,11 @@ public class Notebook
         }
         else {
             for(int i = 0; i < numberOfNotes(); i++) {
-                System.out.println(i + ": " + notes.get(i));
+                System.out.println(i + ": " + notes.get(i).toString());
             }
         }
     }
-    public void showArray(List<String> array)
+    private void showArray(List<String> array)
     {
         if(array.size() == 0) {
             System.out.println("O bloco de notas está vazio.");
@@ -129,5 +129,17 @@ public class Notebook
             }
         }
         showArray(keys);
+    }
+    public void completedTask(int index){
+        notes.get(index).confirmated();
+        System.out.println("Task "+notes.get(index).toString()+" carried out");
+    }
+    public void completedTaskWordKey(String key){
+        for (int i =0;i<notes.size();i++){
+            if (notes.get(i).toString().contains(key)){
+                notes.get(i).confirmated();
+                System.out.println("Task "+notes.get(i).toString()+" carried out");
+            }
+        }
     }
 }

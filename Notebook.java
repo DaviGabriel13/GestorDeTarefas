@@ -54,7 +54,8 @@ public class Notebook
         else if(noteNumber <= numberOfNotes()) {
             // This is a valid note number, so we can print it.
             int indice = noteNumber - 1;
-            System.out.println(notes.get(indice).toString());
+            System.out.println("Tarefa solicitada de acordo com o índice "+ indice+": ");
+            System.out.println(notes.get(indice).getDescription());
         }
         else {
             // This is not a valid note number, so do nothing.
@@ -100,12 +101,16 @@ public class Notebook
     }
     public void showAllNotes()
     {
+//        ArrayList<String> showNotes;
+
         if(numberOfNotes() == 0) {
             System.out.println("O bloco de notas está vazio.");
         }
         else {
+            System.out.println("Todas as notas: ");
             for(int i = 0; i < numberOfNotes(); i++) {
-                System.out.println(i + ": " + notes.get(i).toString());
+//                showNotes.add(notes.get(i).toString());
+                System.out.println(i + ": " + notes.get(i).getDescription());
             }
         }
     }
@@ -115,6 +120,7 @@ public class Notebook
             System.out.println("O bloco de notas está vazio.");
         }
         else {
+            System.out.println("Array filtrados: ");
             for(int i = 0; i < array.size(); i++) {
                 System.out.println(i + ": " + array.get(i));
             }
@@ -122,23 +128,24 @@ public class Notebook
     }
     public void filterKeys(String key){
         List<String> keys = new ArrayList<>();
-
-        for(String x : keys){
-            if(x.contains(key)){
-                keys.add(x);
+        for(Task task : notes) {
+            if(task.getDescription().contains(key)) {
+                keys.add(task.getDescription());
             }
         }
         showArray(keys);
     }
     public void completedTask(int index){
         notes.get(index).confirmated();
-        System.out.println("Task "+notes.get(index).toString()+" carried out");
+        System.out.println("Task filtrada por índice "+index+": ");
+        System.out.println("Task "+notes.get(index).getDescription()+" carried out");
     }
     public void completedTaskWordKey(String key){
         for (int i =0;i<notes.size();i++){
-            if (notes.get(i).toString().contains(key)){
+            if (notes.get(i).getDescription().contains(key)){
                 notes.get(i).confirmated();
-                System.out.println("Task "+notes.get(i).toString()+" carried out");
+                System.out.println("Task filtrada pela chave  "+key+" :");
+                System.out.println("Task "+notes.get(i).getDescription()+" carried out");
             }
         }
     }

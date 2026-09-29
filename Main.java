@@ -10,10 +10,10 @@ public class Main {
         notebook.storeNote(estudo);
         notebook.storeNote(banho);
         notebook.storeNote(regar);
-        System.out.println(""+notebook.numberOfNotes());
+        System.out.println("Tamanho do notebook: "+notebook.numberOfNotes());
         notebook.showAllNotes();
         notebook.showNote(1);
-        notebook.filterKeys("ás");
+        notebook.filterKeys("19");
         notebook.completedTask(0);
         notebook.completedTaskWordKey("Banhar");
         notebook.removeNote(0);
